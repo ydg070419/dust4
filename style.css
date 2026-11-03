@@ -1,0 +1,554 @@
+/* 전체 요소 기본 여백 및 박스 사이징 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+/* 전체 배경 및 텍스트 기본 스타일 */
+body {
+    background-color: #f7f9fc;
+    color: #1e293b;
+    line-height: 1.6;
+    padding: 24px 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 화면 중앙 정렬 및 반응형 최대 너비 설정 */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* 상단 메인 헤더 */
+.header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* 메인 타이틀 */
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+/* 부제목 설명 문구 */
+.subtitle {
+    font-size: 0.95rem;
+    color: #64748b;
+}
+
+/* 지역 및 측정소 선택 컨트롤 패널 */
+.control-panel {
+    background: #ffffff;
+    padding: 16px 20px;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* 개별 컨트롤 그룹 (레이블 + 셀렉트박스) */
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 220px;
+}
+
+/* 선택 레이블 */
+.select-label {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #334155;
+    white-space: nowrap;
+}
+
+/* 공통 셀렉트 박스 */
+.custom-select {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: 2px solid #cbd5e1;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #0f172a;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* 셀렉트 포커스 및 호버 상태 */
+.custom-select:focus, .custom-select:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* ========================================================
+   공기 신호등 대형 카드 스타일
+   ======================================================== */
+.signal-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    margin-bottom: 28px;
+    border: 3px solid #e2e8f0;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 지역명 배지 */
+.signal-region {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #334155;
+    background: #f1f5f9;
+    padding: 6px 18px;
+    border-radius: 20px;
+    letter-spacing: -0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* 신호등 메인 상태 (이모지 + 텍스트 + 큰 수치) */
+.signal-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 8px 0;
+}
+
+/* 신호등 이모지 크기 */
+.signal-emoji {
+    font-size: 3.8rem;
+    line-height: 1;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+/* 신호등 등급 명칭 텍스트 */
+.signal-text {
+    font-size: 2.8rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+/* 수치 표시 박스 */
+.signal-value-box {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    background: rgba(15, 23, 42, 0.05);
+    padding: 6px 16px;
+    border-radius: 16px;
+}
+
+/* 수치 큰 숫자 */
+.signal-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* 수치 단위 */
+.signal-unit {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* 한 줄 안내 행동 수칙 문구 */
+.action-tip {
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    margin-top: 4px;
+    transition: all 0.3s ease;
+}
+
+/* 기준 측정 시각 표시 */
+.latest-time {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+/* --- 공기 신호등 등급별 테마 색상 (배경 틴트 + 테두리 + 글자색) --- */
+
+/* 1. 좋음: 파랑 테마 */
+.signal-good {
+    border-color: #3b82f6;
+    background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+}
+.signal-good .signal-text, .signal-good .signal-value {
+    color: #1d4ed8;
+}
+.signal-good .action-tip {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+/* 2. 보통: 초록 테마 */
+.signal-normal {
+    border-color: #10b981;
+    background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);
+}
+.signal-normal .signal-text, .signal-normal .signal-value {
+    color: #047857;
+}
+.signal-normal .action-tip {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+/* 3. 나쁨: 주황 테마 */
+.signal-bad {
+    border-color: #f97316;
+    background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+}
+.signal-bad .signal-text, .signal-bad .signal-value {
+    color: #c2410c;
+}
+.signal-bad .action-tip {
+    background: #ffedd5;
+    color: #9a3412;
+}
+
+/* 4. 매우나쁨: 빨강 테마 */
+.signal-very-bad {
+    border-color: #ef4444;
+    background: linear-gradient(180deg, #fef2f2 0%, #ffffff 100%);
+}
+.signal-very-bad .signal-text, .signal-very-bad .signal-value {
+    color: #b91c1c;
+}
+.signal-very-bad .action-tip {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* 5. 알 수 없음 / 로딩 테마 */
+.signal-loading, .signal-unknown {
+    border-color: #cbd5e1;
+    background: #ffffff;
+}
+.signal-loading .signal-text, .signal-loading .signal-value,
+.signal-unknown .signal-text, .signal-unknown .signal-value {
+    color: #64748b;
+}
+.signal-loading .action-tip, .signal-unknown .action-tip {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+/* ========================================================
+   차트 섹션 스타일 (Chart.js 가로 막대 그래프)
+   ======================================================== */
+.chart-section {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 28px;
+}
+
+/* 섹션 공통 헤더 */
+.section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+/* 섹션 타이틀 */
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+}
+
+/* 섹션 부가 설명 */
+.section-subtitle {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-weight: 500;
+}
+
+/* 차트 캔버스 래퍼 */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 380px;
+}
+
+/* ========================================================
+   측정소 카드 목록 섹션
+   ======================================================== */
+.station-section {
+    margin-bottom: 40px;
+}
+
+/* 안내 및 로딩 메시지 */
+.status-message {
+    text-align: center;
+    padding: 36px 20px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #64748b;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+/* 측정소 카드 그리드 레이아웃 */
+.station-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 16px;
+}
+
+/* 측정소 개별 카드 (은은한 배경 + 테두리 디자인) */
+.station-card {
+    border-radius: 16px;
+    padding: 18px;
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+/* 숭실대학교 위치 하이라이트 카드 스타일 */
+.station-card.is-soongsil {
+    border-width: 3px;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.18);
+}
+
+/* 숭실대학교 위치 배지 */
+.soongsil-badge {
+    position: absolute;
+    top: -10px;
+    right: 14px;
+    background: #1e3a8a;
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    letter-spacing: -0.3px;
+}
+
+/* 카드 호버 효과 */
+.station-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* 카드 상단 (측정소명 및 등급 라벨) */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+/* 측정소 이름 */
+.station-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+}
+
+/* 카드 내 등급 라벨 배지 */
+.grade-text {
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+/* 카드 본문 수치 영역 */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* 수치 행 */
+.dust-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+/* 수치 이름 라벨 */
+.dust-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #64748b;
+}
+
+/* 수치 숫자 값 */
+.dust-value {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+/* 카드 하단 측정 시각 */
+.card-footer {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    text-align: right;
+    font-weight: 500;
+}
+
+/* --- 측정소 카드 등급별 은은한 배경 & 테두리 색상 --- */
+
+/* 1. 좋음 카드 (파랑) */
+.card-good {
+    border-color: #60a5fa;
+    background-color: #f0f7ff;
+}
+.card-good .grade-text {
+    background-color: #dbeafe;
+    color: #1d4ed8;
+}
+.card-good .dust-row {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 2. 보통 카드 (초록) */
+.card-normal {
+    border-color: #34d399;
+    background-color: #f0fdf4;
+}
+.card-normal .grade-text {
+    background-color: #d1fae5;
+    color: #047857;
+}
+.card-normal .dust-row {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 3. 나쁨 카드 (주황) */
+.card-bad {
+    border-color: #fb923c;
+    background-color: #fff7ed;
+}
+.card-bad .grade-text {
+    background-color: #ffedd5;
+    color: #c2410c;
+}
+.card-bad .dust-row {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 4. 매우나쁨 카드 (빨강) */
+.card-very-bad {
+    border-color: #f87171;
+    background-color: #fef2f2;
+}
+.card-very-bad .grade-text {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+.card-very-bad .dust-row {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* 5. 정보 없음 / 측정 안 됨 카드 (회색) */
+.card-unknown {
+    border-color: #cbd5e1;
+    background-color: #f8fafc;
+}
+.card-unknown .grade-text {
+    background-color: #e2e8f0;
+    color: #64748b;
+}
+
+/* ========================================================
+   모바일 반응형 스타일 (화면 너비 600px 이하)
+   ======================================================== */
+@media (max-width: 600px) {
+    body {
+        padding: 16px 10px;
+    }
+
+    .title {
+        font-size: 1.6rem;
+    }
+
+    .control-panel {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-group {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .signal-card {
+        padding: 24px 16px;
+    }
+
+    .signal-emoji {
+        font-size: 3rem;
+    }
+
+    .signal-text {
+        font-size: 2.2rem;
+    }
+
+    .signal-value {
+        font-size: 2rem;
+    }
+
+    .action-tip {
+        font-size: 1rem;
+    }
+
+    .chart-wrapper {
+        height: 320px;
+    }
+
+    .station-grid {
+        grid-template-columns: 1fr;
+    }
+}

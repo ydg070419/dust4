@@ -1,0 +1,17 @@
+# 환경변수 파일 (인증키 유출 방지를 위해 깃허브 업로드 제외)
+.env
+.env.local
+.env.*.local
+
+# 로컬 테스트용 서버 파일 (Vercel 클라우드 배포 시 충돌 방지를 위해 제외)
+server.mjs
+
+# Vercel 배포 및 빌드 산출물 폴더
+.vercel
+
+# Node.js 패키지 의존성 폴더
+node_modules/
+
+# 운영체제 임시 파일
+.DS_Store
+Thumbs.db

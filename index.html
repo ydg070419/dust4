@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!-- 한국어 언어 설정 -->
+<html lang="ko">
+<head>
+    <!-- 문자 인코딩 설정 -->
+    <meta charset="UTF-8">
+    <!-- 모바일 환경을 위한 반응형 뷰포트 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 웹 페이지 제목 -->
+    <title>실시간 대기오염 공기 신호등</title>
+    <!-- 고품질 한글 웹폰트 Pretendard CDN 연결 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <!-- 외부 CSS 스타일시트 파일 연결 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 가로 막대 그래프 렌더링을 위한 Chart.js CDN 연결 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- 메인 반응형 컨테이너 -->
+    <div class="container">
+        <!-- 상단 헤더 영역 -->
+        <header class="header">
+            <!-- 메인 제목 표시 -->
+            <h1 class="title">🚦 실시간 공기 신호등</h1>
+            <!-- 설명 안내 문구 -->
+            <p class="subtitle">에어코리아 공식 실시간 대기 정보를 한눈에 확인하세요.</p>
+        </header>
+
+        <!-- 컨트롤 패널 (시도 선택 & 세부 측정소 선택) -->
+        <section class="control-panel">
+            <!-- 시도 선택 컨트롤 그룹 -->
+            <div class="control-group">
+                <label for="sidoSelect" class="select-label">시·도</label>
+                <select id="sidoSelect" class="custom-select">
+                    <option value="전국">전국</option>
+                    <option value="서울" selected>서울</option>
+                    <option value="부산">부산</option>
+                    <option value="대구">대구</option>
+                    <option value="인천">인천</option>
+                    <option value="광주">광주</option>
+                    <option value="대전">대전</option>
+                    <option value="울산">울산</option>
+                    <option value="세종">세종</option>
+                    <option value="경기">경기</option>
+                    <option value="강원">강원</option>
+                    <option value="충북">충북</option>
+                    <option value="충남">충남</option>
+                    <option value="전북">전북</option>
+                    <option value="전남">전남</option>
+                    <option value="경북">경북</option>
+                    <option value="경남">경남</option>
+                    <option value="제주">제주</option>
+                </select>
+            </div>
+
+            <!-- 세부 측정소 선택 컨트롤 그룹 (기본: 숭실대학교 동작구) -->
+            <div class="control-group">
+                <label for="stationSelect" class="select-label">세부 지역 (측정소)</label>
+                <select id="stationSelect" class="custom-select">
+                    <!-- 자바스크립트에서 자동으로 채워지며, 기본으로 숭실대학교(동작구) 선택 -->
+                    <option value="동작구" selected>동작구 (숭실대학교 🏫)</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- 공기 신호등 대표 상태 표시 대형 섹션 -->
+        <section id="signalCard" class="signal-card signal-loading">
+            <!-- 현재 선택 지역명 라벨 -->
+            <div class="signal-region">
+                <span id="currentRegionName">숭실대학교 (동작구)</span> 대기 상태
+            </div>
+            
+            <!-- 공기 신호등 메인 상태 (이모지 + 등급명 + 미세먼지 수치) -->
+            <div class="signal-main">
+                <!-- 신호등 상태 이모지 (🔵🟢🟠🔴) -->
+                <span id="signalEmoji" class="signal-emoji">⏳</span>
+                <!-- 상태 텍스트 (좋음 / 보통 / 나쁨 / 매우나쁨) -->
+                <span id="signalText" class="signal-text">불러오는 중...</span>
+                <!-- 수치 박스 -->
+                <div class="signal-value-box">
+                    <span id="averageValue" class="signal-value">-</span>
+                    <span class="signal-unit">㎍/㎥</span>
+                </div>
+            </div>
+
+            <!-- 한 줄 안내 행동 수칙 문구 -->
+            <div id="actionTip" class="action-tip">대기오염 데이터를 불러오고 있습니다.</div>
+
+            <!-- 기준 측정 시각 표시 -->
+            <div id="latestTime" class="latest-time">-</div>
+        </section>
+
+        <!-- 상위 10개 측정소 가로 막대 그래프 섹션 -->
+        <section class="chart-section">
+            <!-- 차트 제목 및 설명 -->
+            <div class="section-header">
+                <h2 class="section-title">📊 미세먼지 수치 높은 측정소 TOP 10</h2>
+                <span class="section-subtitle">(높은 순 정렬, 측정 안 됨 제외)</span>
+            </div>
+            <!-- 반응형 차트 캔버스 컨테이너 -->
+            <div class="chart-wrapper">
+                <canvas id="dustChart"></canvas>
+            </div>
+        </section>
+
+        <!-- 측정소별 카드 목록 섹션 -->
+        <main class="station-section">
+            <!-- 섹션 헤더 -->
+            <div class="section-header">
+                <h2 class="section-title">🏢 측정소별 실시간 상세 현황</h2>
+            </div>
+            <!-- 로딩 및 에러 상태 메시지 -->
+            <div id="statusMessage" class="status-message">데이터를 불러오는 중입니다...</div>
+            <!-- 측정소별 카드가 렌더링되는 그리드 -->
+            <div id="stationList" class="station-grid"></div>
+        </main>
+    </div>
+
+    <!-- 프론트엔드 자바스크립트 연결 -->
+    <script src="script.js"></script>
+</body>
+</html>
